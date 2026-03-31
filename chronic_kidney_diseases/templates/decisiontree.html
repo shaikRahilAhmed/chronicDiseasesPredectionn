@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Decision Tree - HealthAI{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 50px auto;">
+    <h2>Decisison Tree Model</h2>
+    <p>Use the Heart Disease module to generate predictions.</p>
+    <a href="{% url 'svm' %}" class="btn">Go to Heart Disease Prediction</a>
+</div>
+{% endblock %}

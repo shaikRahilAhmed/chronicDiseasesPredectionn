@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Heart Disease Prediction - HealthAI{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+  <h2>Cardiovascular Disease Prediction</h2>
+  <p>Enter the patient's heart health metrics.</p>
+  <form action="{% url 'dec' %}" method="POST">
+    {% csrf_token %}
+    <input type="number" name="headline1" placeholder="Age" required>
+    <input type="number" name="headline2" placeholder="Sex (1=Male, 0=Female)" required>
+    <input type="number" name="headline3" placeholder="Chest Pain Type (1-4)" required>
+    <input type="number" name="headline4" placeholder="Resting BP" required>
+    <input type="number" name="headline5" placeholder="Cholesterol" required>
+    <input type="number" name="headline6" placeholder="Fasting BS > 120 (1=True, 0=False)" required>
+    <input type="number" name="headline7" placeholder="Resting ECG Results (0-2)" required>
+    <input type="number" name="headline8" placeholder="Max Heart Rate" required>
+    <input type="number" name="headline9" placeholder="Exercise Induced Angina (1=Yes, 0=No)" required>
+    <input type="text" name="headline10" placeholder="ST Depression (e.g. 2.4)" required>
+    <input type="number" name="headline11" placeholder="Slope of Peak Exercise ST" required>
+    <input type="number" name="headline12" placeholder="Number of Major Vessels (0-3)" required>
+    <input type="number" name="headline13" placeholder="Thallium (3=Normal, 6=Fixed, 7=Reversable)" required>
+
+    <button type="submit" style="width: 100%; margin-top: 20px;">Predict Risk</button>
+  </form>
+</div>
+{% endblock %}

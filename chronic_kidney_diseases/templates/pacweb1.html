@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Diabetes Prediction - HealthAI{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+  <h2>Diabetes Prediction</h2>
+  <p>Enter the patient's details below.</p>
+  <form action="{% url 'pac' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="headline1" placeholder="Pregnancies" required>
+    <input type="text" name="headline2" placeholder="Glucose" required>
+    <input type="text" name="headline3" placeholder="Blood Pressure" required>
+    <input type="text" name="headline4" placeholder="Skin Thickness" required>
+    <input type="text" name="headline5" placeholder="Insulin" required>
+    <input type="text" name="headline6" placeholder="BMI" required>
+    <input type="text" name="headline7" placeholder="Diabetes Pedigree Function" required>
+    <input type="text" name="headline8" placeholder="Age" required>
+
+    <button type="submit" style="width: 100%; margin-top: 20px;">Predict Risk</button>
+  </form>
+</div>
+{% endblock %}

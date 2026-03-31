@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Login - HealthAI{% endblock %}
+{% block content %}
+
+<div style="max-width:440px; margin:40px auto;">
+    <div class="card">
+        <div style="text-align:center; margin-bottom:28px;">
+            <div class="feature-icon" style="margin:0 auto 16px;">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2 style="margin-bottom:4px;">Welcome back</h2>
+            <p style="opacity:0.6; font-size:0.9rem; margin:0;">Sign in to your HealthAI account</p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-circle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{% url 'loginCheck' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="email" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" style="width:100%; margin-top:8px;">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+
+        <p style="text-align:center; margin-top:20px; font-size:0.9rem; opacity:0.75;">
+            Don't have an account?
+            <a href="{% url 'reg' %}" style="color:var(--accent); font-weight:600;">Register here</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

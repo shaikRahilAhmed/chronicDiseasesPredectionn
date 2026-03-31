@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Welcome - HealthAI{% endblock %}
+{% block content %}
+
+<div class="card hero">
+    <h1>Welcome to <span style="color:var(--accent);">HealthAI</span></h1>
+    <p style="font-size:clamp(1rem,2.5vw,1.2rem); margin:12px auto 8px;">Advanced Chronic Disease Prediction using Machine Learning</p>
+    <p style="opacity:0.65; max-width:560px; margin:0 auto;">Assess your risk for Diabetes, Heart Disease, Stroke, Kidney Disease, and Hypertension — powered by trained ML models.</p>
+    <div class="hero-btns">
+        <a href="{% url 'login' %}" class="btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="{% url 'reg' %}" class="btn btn-ghost"><i class="fas fa-user-plus"></i> Register</a>
+    </div>
+</div>
+
+<div class="grid grid-auto" style="margin-top:8px;">
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+        <h3>Heart Disease</h3>
+        <p style="opacity:0.7;">Decision Tree analysis on 13 clinical parameters.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-tint"></i></div>
+        <h3>Diabetes</h3>
+        <p style="opacity:0.7;">Random Forest on glucose, BMI and health metrics.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+        <h3>Stroke</h3>
+        <p style="opacity:0.7;">AdaBoost on lifestyle and health indicators.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-notes-medical"></i></div>
+        <h3>Kidney Disease</h3>
+        <p style="opacity:0.7;">Naive Bayes on lab test values and biomarkers.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Hypertension</h3>
+        <p style="opacity:0.7;">Random Forest with visual risk distribution graphs.</p>
+    </div>
+</div>
+
+{% endblock %}

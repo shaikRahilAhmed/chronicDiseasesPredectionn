@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - HealthAI{% endblock %}
+{% block content %}
+
+<div class="card hero" style="padding: clamp(30px,6vw,60px) 20px;">
+    <h1>Welcome back, <span style="color:var(--accent);">{{ request.session.username|default:"User" }}</span></h1>
+    <p style="opacity:0.7;">Choose a disease prediction module below to get started.</p>
+</div>
+
+<div class="grid grid-auto" style="margin-top:8px;">
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+        <h3>Heart Disease</h3>
+        <p style="opacity:0.7;">Predict cardiovascular risk using clinical parameters.</p>
+        <a href="{% url 'svm' %}" class="btn" style="margin-top:8px;">Open Module</a>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-tint"></i></div>
+        <h3>Diabetes</h3>
+        <p style="opacity:0.7;">Assess diabetes likelihood from health metrics.</p>
+        <a href="{% url 'nvb' %}" class="btn" style="margin-top:8px;">Open Module</a>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+        <h3>Stroke</h3>
+        <p style="opacity:0.7;">Upload your dataset to evaluate stroke probability.</p>
+        <a href="{% url 'accuracy' %}" class="btn" style="margin-top:8px;">Open Module</a>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-notes-medical"></i></div>
+        <h3>Kidney Disease</h3>
+        <p style="opacity:0.7;">Upload your dataset to detect kidney disease risk.</p>
+        <a href="{% url 'randomf' %}" class="btn" style="margin-top:8px;">Open Module</a>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Hypertension</h3>
+        <p style="opacity:0.7;">Upload your dataset to analyze hypertension risk.</p>
+        <a href="{% url 'graph' %}" class="btn" style="margin-top:8px;">Open Module</a>
+    </div>
+</div>
+
+{% endblock %}

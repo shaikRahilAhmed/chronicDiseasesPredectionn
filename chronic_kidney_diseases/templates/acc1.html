@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}{{ disease }} - HealthAI{% endblock %}
+{% block content %}
+
+<div style="max-width:660px; margin:40px auto;">
+    <div class="card">
+        <div style="text-align:center; margin-bottom:24px;">
+            <div class="feature-icon" style="margin:0 auto 16px;">
+                {% if disease == 'Stroke' %}
+                    <i class="fas fa-brain"></i>
+                {% else %}
+                    <i class="fas fa-notes-medical"></i>
+                {% endif %}
+            </div>
+            <h2 style="margin-bottom:4px;">{{ disease }} Prediction</h2>
+            <p style="opacity:0.6; font-size:0.9rem; margin:0;">Upload your dataset and let the model analyze it</p>
+        </div>
+
+        {% if not accuracy %}
+
+            {% if error %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data" id="uploadForm">
+                {% csrf_token %}
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" name="csv_file" accept=".csv" required id="csvInput">
+                    <div class="upload-icon">📂</div>
+                    <p style="font-weight:600; margin-bottom:4px;">Click to choose a CSV file</p>
+                    <p style="opacity:0.55; font-size:0.85rem; margin:0;">or drag and drop your file here</p>
+                    <div class="file-name" id="fileName">No file selected</div>
+                </div>
+                <button type="submit" style="width:100%; margin-top:18px;">
+                    <i class="fas fa-play-circle"></i> Run Prediction
+                </button>
+            </form>
+
+        {% endif %}
+
+        {% if accuracy %}
+            {% if graph %}
+            <div class="graph-box">
+                <img src="data:image/png;base64,{{ graph }}" alt="{{ disease }} Distribution">
+            </div>
+            {% endif %}
+
+            <div class="result-box">
+                <p style="opacity:0.6; font-size:0.8rem; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Model Accuracy</p>
+                <div class="accuracy-value">{{ accuracy }}%</div>
+                <p style="opacity:0.55; font-size:0.82rem; margin-top:10px; margin-bottom:0;">Based on your uploaded dataset</p>
+            </div>
+
+            <div style="display:flex; gap:12px; margin-top:16px;" class="btn-row">
+                <a href="{{ request.path }}" class="btn btn-ghost" style="flex:1;">
+                    <i class="fas fa-upload"></i> Upload Another
+                </a>
+                <a href="{% url 'home' %}" class="btn" style="flex:1;">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </div>
+        {% else %}
+            <a href="{% url 'home' %}" style="display:block; text-align:center; margin-top:18px; opacity:0.6; font-size:0.88rem;">
+                ← Back to Dashboard
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    const input = document.getElementById('csvInput');
+    const zone  = document.getElementById('uploadZone');
+    if (input) {
+        input.addEventListener('change', () => {
+            document.getElementById('fileName').textContent = input.files[0]?.name || 'No file selected';
+        });
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+        zone.addEventListener('drop', e => {
+            e.preventDefault(); zone.classList.remove('dragover');
+            if (e.dataTransfer.files[0]) {
+                input.files = e.dataTransfer.files;
+                document.getElementById('fileName').textContent = e.dataTransfer.files[0].name;
+            }
+        });
+    }
+</script>
+{% endblock %}

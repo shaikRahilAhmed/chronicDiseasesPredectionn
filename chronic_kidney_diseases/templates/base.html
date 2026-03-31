@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HealthAI{% endblock %}</title>
+    <link href="{% static 'layout/styles/modern.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <div class="wrapper navbar">
+        <div class="logo">
+            <h1><a href="{% url 'root' %}">Health<span style="color:var(--accent);">AI</span></a></h1>
+        </div>
+
+        <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+
+        <nav id="nav">
+            <ul>
+                {% if request.session.username %}
+                    <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="{% url 'accuracy' %}"><i class="fas fa-brain"></i> Stroke</a></li>
+                    <li><a href="{% url 'randomf' %}"><i class="fas fa-notes-medical"></i> Kidney</a></li>
+                    <li><a href="{% url 'nvb' %}"><i class="fas fa-tint"></i> Diabetes</a></li>
+                    <li><a href="{% url 'svm' %}"><i class="fas fa-heartbeat"></i> Heart</a></li>
+                    <li><a href="{% url 'graph' %}"><i class="fas fa-chart-line"></i> Hypertension</a></li>
+                    <li><a href="{% url 'logout' %}" style="color:var(--accent2);">
+                        <i class="fas fa-sign-out-alt"></i> {{ request.session.username }}
+                    </a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="{% url 'reg' %}" class="btn" style="padding:8px 18px; font-size:0.85rem;">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="wrapper container fade-in">
+    {% block content %}{% endblock %}
+</div>
+
+<footer>
+    <div class="wrapper">
+        <p>&copy; 2026 HealthAI &mdash; Chronic Disease Prediction System</p>
+    </div>
+</footer>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        nav.classList.toggle('open');
+    });
+    // close nav on link click (mobile)
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        nav.classList.remove('open');
+    }));
+</script>
+</body>
+</html>

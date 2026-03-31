@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>PAC Result</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet">
+</head>
+
+<style>
+#pageintro{
+    background-image: url('{% static "images/demo/1.jpg" %}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 700px;
+    padding-top: 150px;
+    color: white;
+}
+.result-box{
+    background: rgba(0,0,0,0.6);
+    padding: 30px;
+    border-radius: 12px;
+    width: 60%;
+    margin: auto;
+}
+</style>
+
+<body id="top" style="background-color:maroon;">
+
+<!-- HEADER -->
+<div class="wrapper row1">
+    <header id="header" class="hoc clear">
+        <div id="logo" class="fl_left">
+            <h1>
+                <a href="#">Chronic Diseases Prediction Using ML</a>
+            </h1>
+        </div>
+
+        <nav id="mainav" class="fl_right">
+            <ul class="clear">
+                <li><a href="{% url 'accuracy' %}">Stroke</a></li>
+                <li><a href="{% url 'randomf' %}">Kidney Disease</a></li>
+                <li class="active"><a href="{% url 'pac' %}">Diabetes (PAC)</a></li>
+                <li><a href="{% url 'svm' %}">Cardio Vascular</a></li>
+                <li><a href="{% url 'graph' %}">Hypertension</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="pageintro" class="hoc clear">
+    <article class="center result-box">
+        <h2>Passive Aggressive Classifier Result</h2>
+        <hr>
+
+        {% if result %}
+            <h3>Prediction Result</h3>
+            <p style="font-size:20px;"><strong>{{ result }}</strong></p>
+        {% else %}
+            <p>No prediction available</p>
+        {% endif %}
+
+        {% if accuracy %}
+            <h4>Accuracy</h4>
+            <p style="font-size:18px;">{{ accuracy }}%</p>
+        {% endif %}
+    </article>
+</div>
+
+<!-- FOOTER -->
+<div class="wrapper row5">
+    <div id="copyright" class="hoc clear">
+        <p class="fl_left">© 2026 Chronic Disease Prediction System</p>
+    </div>
+</div>
+
+<a id="backtotop" href="#top">
+    <i class="fas fa-chevron-up"></i>
+</a>
+
+<script src="{% static 'layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.mobilemenu.js' %}"></script>
+
+</body>
+</html>
