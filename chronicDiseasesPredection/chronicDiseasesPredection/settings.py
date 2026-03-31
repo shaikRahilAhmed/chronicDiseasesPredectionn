@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'chronic_kidney_diseases.urls'
+ROOT_URLCONF = 'chronicDiseasesPredection.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'chronic_kidney_diseases.wsgi.application'
+WSGI_APPLICATION = 'chronicDiseasesPredection.wsgi.application'
 
 
 # Database
