@@ -41,12 +41,6 @@
         {% endif %}
 
         {% if accuracy %}
-            {% if graph %}
-            <div class="graph-box">
-                <img src="data:image/png;base64,{{ graph }}" alt="{{ disease }} Distribution">
-            </div>
-            {% endif %}
-
             <div class="result-box">
                 <p style="opacity:0.6; font-size:0.8rem; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Model Accuracy</p>
                 <div class="accuracy-value">{{ accuracy }}%</div>

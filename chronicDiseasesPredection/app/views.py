@@ -223,18 +223,7 @@ def accuracy(request):
                 )
                 model.fit(X_train, y_train)
                 acc = round(accuracy_score(y_test, model.predict(X_test)) * 100, 2)
-
-                # generate stroke distribution graph
-                plt.figure(figsize=(6, 4))
-                sns.countplot(x='stroke', data=df)
-                plt.title('Stroke Distribution')
-                buf = io.BytesIO()
-                plt.savefig(buf, format='png')
-                buf.seek(0)
-                uri = urllib.parse.quote(base64.b64encode(buf.read()))
-                plt.close()
-
-                return render(request, 'acc1.html', {'accuracy': acc, 'disease': 'Stroke', 'graph': uri})
+                return render(request, 'acc1.html', {'accuracy': acc, 'disease': 'Stroke'})
         except Exception as e:
             error = f"Error processing file: {str(e)}"
 
@@ -273,18 +262,7 @@ def randomf(request):
                 model = MultinomialNB()
                 model.fit(X_train, y_train)
                 acc = round(accuracy_score(y_test, model.predict(X_test)) * 100, 2)
-
-                # generate classification distribution graph
-                plt.figure(figsize=(6, 4))
-                sns.countplot(x='classification', data=df)
-                plt.title('Kidney Disease Classification Distribution')
-                buf = io.BytesIO()
-                plt.savefig(buf, format='png')
-                buf.seek(0)
-                uri = urllib.parse.quote(base64.b64encode(buf.read()))
-                plt.close()
-
-                return render(request, 'acc1.html', {'accuracy': acc, 'disease': 'Kidney Disease', 'graph': uri})
+                return render(request, 'acc1.html', {'accuracy': acc, 'disease': 'Kidney Disease'})
         except Exception as e:
             error = f"Error processing file: {str(e)}"
 
